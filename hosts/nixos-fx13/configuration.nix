@@ -17,15 +17,21 @@ in
 
   boot = {
     kernelParams = [
-    "amd_pstate=active"
+    "amd_pstate=guided"
     "amdgpu.dcdebugmask=0x10"
+    "amd_prefcore=disable"
     ];
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPatches = [
+      { name = "mt7922-bt";
+        patch = "Kernel Patch/patch";
+      }
+    ];
   };
 
   hardware = {
     nvidia = {
-      modesetting.enable = true;
+      # modesetting.enable = true;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
       # dynamicBoost.enable = true;
@@ -33,11 +39,11 @@ in
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
       prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-        # reverseSync.enable = true;
+        # offload = {
+        #   enable = true;
+        #   enableOffloadCmd = true;
+        # };
+        reverseSync.enable = true;
         amdgpuBusId = "PCI:105:0:0";
         nvidiaBusId = "PCI:1:0:0";
       };
@@ -45,6 +51,7 @@ in
   };
 
   services = {
+    system76-scheduler.enable;
     fstrim.enable = true;
     fwupd.enable = true;
     asusd = {
@@ -102,11 +109,11 @@ in
   # };
 
   powerManagement = {
-    cpuFreqGovernor = "powersave";
-    cpufreq = {
-      min = 400000;
-      max = 4000000;
-    };
+    cpuFreqGovernor = "schedutil";
+    # cpufreq = {
+    #   min = 400000;
+    #   max = 4000000;
+    # };
   };
 
   system.stateVersion = "24.05";
