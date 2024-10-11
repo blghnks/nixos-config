@@ -3,7 +3,6 @@
 let
   commonPackages = import ../../common-packages.nix { inherit pkgs inputs; };
   utilityPackages = import ../../utility-packages.nix { inherit pkgs inputs; };
-  btpatch = import ../../patches/mt7922-bluetooth-patch;
 
 in
 {
@@ -25,7 +24,7 @@ in
     kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = [
       { name = "mt7922-bt";
-        patch = btpatch;
+        patch = ../../patches/mt7922-bluetooth-patch;
       }
     ];
   };
@@ -75,6 +74,7 @@ in
   };
 
   programs = {
+    kdeconnect.enable = true;
     htop.enable = true;
     steam = {
       enable = true;
