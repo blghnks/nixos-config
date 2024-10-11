@@ -3,6 +3,7 @@
 let
   commonPackages = import ../../common-packages.nix { inherit pkgs inputs; };
   utilityPackages = import ../../utility-packages.nix { inherit pkgs inputs; };
+  btpatch = import ../../patches/mt7922-bluetooth-patch;
 
 in
 {
@@ -21,10 +22,10 @@ in
     "amdgpu.dcdebugmask=0x10"
     "amd_prefcore=disable"
     ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = [
       { name = "mt7922-bt";
-        patch = "Kernel Patch/patch";
+        patch = btpatch;
       }
     ];
   };
@@ -51,7 +52,7 @@ in
   };
 
   services = {
-    system76-scheduler.enable;
+    system76-scheduler.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     asusd = {
