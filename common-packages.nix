@@ -17,6 +17,7 @@
   ardour
   audacity
   carla
+  lv2
   inputs.nixpkgsstable.legacyPackages.${pkgs.system}.tauon
   cmus
   rnote
@@ -28,4 +29,5 @@
   bottles
   qbittorrent
   rar
+  kate
 ]

@@ -1,9 +1,9 @@
 { config, pkgs, inputs, ... }:
 
 let
-  commonPackages = import ../../common-packages.nix { inherit pkgs inputs; };
-  utilityPackages = import ../../utility-packages.nix { inherit pkgs inputs; };
-
+  common-pkgs = import ../../common-packages.nix { inherit pkgs inputs; };
+  utility-pkgs = import ../../utility-packages.nix { inherit pkgs inputs; };
+  # hyprland-pkgs = import ../../hyprland-packages.nix { inherit pkgs inputs; };
 in
 {
   imports = [
@@ -17,21 +17,20 @@ in
 
   boot = {
     kernelParams = [
-    "amd_pstate=guided"
+    "amdgpu.abmlevel=0"
+    "amd_pstate=passive"
     "amdgpu.dcdebugmask=0x10"
-    "amd_prefcore=disable"
     ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = [
       { name = "mt7922-bt";
-        patch = ../../patches/mt7922-bluetooth-patch;
-      }
+        patch = ../../patches/mt7922-bluetooth-patch; }
     ];
   };
 
   hardware = {
     nvidia = {
-      # modesetting.enable = true;
+      modesetting.enable = true;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
       # dynamicBoost.enable = true;
@@ -51,7 +50,7 @@ in
   };
 
   services = {
-    system76-scheduler.enable = true;
+    #system76-scheduler.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     asusd = {
@@ -93,28 +92,28 @@ in
       supergfxctl-plasmoid
       ryzenadj
     ]
-      ++commonPackages
-      ++utilityPackages;
+      ++common-pkgs
+      ++utility-pkgs;
   };
 
   ## Startup script template
-  # systemd = {
-  #   services = {
-  #     startup = {
-  #       script = ''
-  #
-  #       '';
-  #       wantedBy = [ "multi-user.target" ];
-  #     };
-  #   };
-  # };
+  systemd = {
+    services = {
+      startup = {
+        script = ''
+          "${pkgs.ryzenadj}/bin/ryzenadj" --apu-skin-temp=34 --dgpu-skin-temp=34 --tctl-temp=82
+        '';
+        wantedBy = ["multi-user.target"];
+      };
+    };
+  };
 
   powerManagement = {
     cpuFreqGovernor = "schedutil";
-    # cpufreq = {
+    cpufreq = {
     #   min = 400000;
-    #   max = 4000000;
-    # };
+      max = 4600000;
+    };
   };
 
   system.stateVersion = "24.05";
