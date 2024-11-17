@@ -1,33 +1,44 @@
 { pkgs, inputs }: with pkgs; [
-  python3Minimal
-  zulu8
-  zulu17
-  zulu
-  brave
-  librewolf
-  vesktop
-  thunderbird
-  vscodium-fhs
-  okteta
-  neovim
-  git
-  wget
-  obsidian
-  onlyoffice-bin
   ardour
   audacity
-  carla
-  lv2
-  inputs.nixpkgsstable.legacyPackages.${pkgs.system}.tauon
-  cmus
-  rnote
-  krita
-  vlc
-  prismlauncher
-  mission-center
-  protonvpn-gui
+  bankstown-lv2
   bottles
+  brave
+  carla
+  cmus
+  git
+  glxinfo
+  jamesdsp
+  kate
+  kdePackages.kdenlive
+  krita
+  librewolf
+  lshw
+  maliit-keyboard
+  mission-center
+  neovim
+  nvtopPackages.full
+  obs-studio
+  obsidian
+  okteta
+  onlyoffice-desktopeditors
+  pciutils
+  prismlauncher
+  protonvpn-gui
+  python3Minimal
   qbittorrent
   rar
-  kate
+  reaper
+  rnote
+  ryzenadj
+  tauon
+  thunderbird
+  vesktop
+  vlc
+  vscodium-fhs
+  vulkan-tools
+  wget
+  zulu
+  zulu17
+  zulu8
 ]
