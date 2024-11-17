@@ -161,7 +161,6 @@ in
   };
 
   environment = {
-    memoryAllocator.provider = "graphene-hardened-light";
     systemPackages = with pkgs; []
       ++common-pkgs;
     sessionVariables = rec {
@@ -172,10 +171,14 @@ in
 
   systemd = {
     services = {
-      startup = {
+      startup-tux = {
         script = ''
-          ryzenadj -a 18000 -b 21000 -c 16000 -f 76
-          cp -f /home/tux/.config/charge_control_end_threshold /sys/class/power_supply/BAT0/charge_control_end_threshold
+          "${pkgs.ryzenadj}/bin/ryzenadj" -a 18000 -b 21000 -c 16000 -f 76
+          cd ${pkgs.coreutils}/bin
+          cp /sys/class/power_supply/BAT0/charge_control_end_threshold /tmp
+          echo 80 > /tmp/charge_control_end_threshold
+          cp /tmp/charge_control_end_threshold /sys/class/power_supply/BAT0/charge_control_end_threshold
+          rm /tmp/charge_control_end_threshold
         '';
         wantedBy = ["multi-user.target"];
       };
