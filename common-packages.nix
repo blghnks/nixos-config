@@ -15,7 +15,6 @@
   librewolf
   lshw
   maliit-keyboard
-  mission-center
   neovim
   nvtopPackages.full
   obs-studio

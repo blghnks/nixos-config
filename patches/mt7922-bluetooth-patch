@@ -1,11 +1,11 @@
---- linux-6.11.3/drivers/bluetooth/btusb.c.orig	2024-10-11 17:48:16.562285208 +0300
-+++ linux-6.11.3/drivers/bluetooth/btusb.c	2024-10-11 17:48:30.910853649 +0300
-@@ -631,7 +631,7 @@ static const struct usb_device_id quirks
- 						     BTUSB_VALID_LE_STATES },
+--- linux-6.12/drivers/bluetooth/btusb.c.orig	2024-11-23 21:32:36.670472910 +0300
++++ linux-6.12/drivers/bluetooth/btusb.c	2024-11-23 21:32:58.076105229 +0300
+@@ -590,7 +590,7 @@ static const struct usb_device_id quirks
+ 						     BTUSB_WIDEBAND_SPEECH },
  
  	/* MediaTek MT7922 Bluetooth devices */
 -	{ USB_DEVICE(0x13d3, 0x3585), .driver_info = BTUSB_MEDIATEK |
 +	{ USB_DEVICE(0x13d3, 0x3584), .driver_info = BTUSB_MEDIATEK |
- 						     BTUSB_WIDEBAND_SPEECH |
- 						     BTUSB_VALID_LE_STATES },
+ 						     BTUSB_WIDEBAND_SPEECH },
  
+ 	/* MediaTek MT7922A Bluetooth devices */
