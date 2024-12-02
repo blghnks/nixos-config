@@ -21,7 +21,7 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelParams = ["amdgpu.abmlevel=0" "amdgpu.dcdebugmask=0x10"];
+    kernelParams = ["amdgpu.abmlevel=0" "amd_prefcore=disable" "amdgpu.dcdebugmask=0x10"];
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [
       (btusb-mt7922-fix.overrideAttrs (_: {
@@ -44,7 +44,7 @@ in
       modesetting.enable = true;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
-      # dynamicBoost.enable = true;
+      dynamicBoost.enable = true;
       open = true;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
@@ -88,18 +88,24 @@ in
   services = {
     fstrim.enable = true;
     fwupd.enable = true;
+    supergfxd.enable = true;
+    asusd = {
+      enable = true;
+      enableUserService = true;
+    };
+    system76-scheduler.enable = true;
     xserver = {
       videoDrivers = ["nvidia"];
     };
-    pipewire = {
-      extraConfig.pipewire = {
-        "10-clock-rate" = {
-          "context.properties" = {
-            "default.clock.min-quantum" = 512;
-          };
-        };
-      };
-    };
+    # pipewire = {
+    #   extraConfig.pipewire = {
+    #     "10-clock-rate" = {
+    #       "context.properties" = {
+    #         "default.clock.min-quantum" = 512;
+    #       };
+    #     };
+    #   };
+    # };
     xserver = {
       enable = true;
       xkb = {
@@ -165,7 +171,7 @@ in
       ++common-pkgs;
     sessionVariables = rec {
       NIXOS_OZONE_WL = "1";
-      STEAM_FORCE_DESKTOPUI_SCALING = "1.80";
+      STEAM_FORCE_DESKTOPUI_SCALING = "1.65";
     };
   };
 
@@ -173,12 +179,6 @@ in
     services = {
       startup-tux = {
         script = ''
-          "${pkgs.ryzenadj}/bin/ryzenadj" -a 18000 -b 21000 -c 16000 -f 76
-          cd ${pkgs.coreutils}/bin
-          cp /sys/class/power_supply/BAT0/charge_control_end_threshold /tmp
-          echo 80 > /tmp/charge_control_end_threshold
-          cp /tmp/charge_control_end_threshold /sys/class/power_supply/BAT0/charge_control_end_threshold
-          rm /tmp/charge_control_end_threshold
         '';
         wantedBy = ["multi-user.target"];
       };
