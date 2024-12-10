@@ -1,33 +1,26 @@
 { pkgs, inputs }: with pkgs; [
   ardour
   audacity
-  bankstown-lv2
   bottles
   brave
   carla
-  cmus
   git
   glxinfo
   jamesdsp
-  kate
   kdePackages.kdenlive
   krita
   librewolf
   lshw
-  maliit-keyboard
   neovim
   nvtopPackages.full
   obs-studio
-  obsidian
   okteta
   onlyoffice-desktopeditors
   pciutils
   prismlauncher
+  protonvpn-cli_2
   protonvpn-gui
-  python3Minimal
   qbittorrent
-  rar
-  reaper
   rnote
   ryzenadj
   tauon
@@ -37,7 +30,4 @@
   vscodium-fhs
   vulkan-tools
   wget
-  zulu
-  zulu17
-  zulu8
 ]

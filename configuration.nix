@@ -66,18 +66,15 @@ in
   i18n = {
     defaultLocale = "en_GB.UTF-8";
     extraLocaleSettings = {
-      LANGUAGE = "en_GB.UTF-8";
-        LC_ALL = "en_GB.UTF-8";
-        LC_ADDRESS = "en_GB.UTF-8";
-        LC_NAME = "en_GB.UTF-8";
-        LC_MONETARY = "en_GB.UTF-8";
-        LC_PAPER = "en_GB.UTF-8";
-        LC_IDENTIFICATION = "en_GB.UTF-8";
-        LC_TELEPHONE = "en_GB.UTF-8";
-        LC_MEASUREMENT = "en_GB.UTF-8";
-        LC_TIME = "en_GB.UTF-8";
-        LC_NUMERIC = "en_GB.UTF-8";
-        LANG = "en_GB.UTF-8";
+      LC_ADDRESS = "tr_TR.UTF-8";
+      LC_IDENTIFICATION = "tr_TR.UTF-8";
+      LC_MEASUREMENT = "tr_TR.UTF-8";
+      LC_MONETARY = "tr_TR.UTF-8";
+      LC_NAME = "tr_TR.UTF-8";
+      LC_NUMERIC = "tr_TR.UTF-8";
+      LC_PAPER = "tr_TR.UTF-8";
+      LC_TELEPHONE = "tr_TR.UTF-8";
+      LC_TIME = "tr_TR.UTF-8";
     };
   };
 
@@ -88,24 +85,18 @@ in
   services = {
     fstrim.enable = true;
     fwupd.enable = true;
-    supergfxd.enable = true;
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
-    system76-scheduler.enable = true;
     xserver = {
       videoDrivers = ["nvidia"];
     };
-    # pipewire = {
-    #   extraConfig.pipewire = {
-    #     "10-clock-rate" = {
-    #       "context.properties" = {
-    #         "default.clock.min-quantum" = 512;
-    #       };
-    #     };
-    #   };
-    # };
+    pipewire = {
+      extraConfig.pipewire = {
+        "10-clock-rate" = {
+          "context.properties" = {
+            "default.clock.min-quantum" = 512;
+          };
+        };
+      };
+    };
     xserver = {
       enable = true;
       xkb = {
@@ -167,23 +158,35 @@ in
   };
 
   environment = {
+    plasma6.excludePackages = with
+      pkgs.kdePackages; [
+        khelpcenter
+        plasma-browser-integration
+        elisa
+      ];
     systemPackages = with pkgs; []
       ++common-pkgs;
     sessionVariables = rec {
       NIXOS_OZONE_WL = "1";
-      STEAM_FORCE_DESKTOPUI_SCALING = "1.65";
     };
   };
 
   systemd = {
     services = {
-      startup-tux = {
+      startup = {
         script = ''
+          ${pkgs.ryzenadj}/bin/ryzenadj -a 20000 -b 24000 -c 18000
+          ${pkgs.nix}/bin/nix-shell -p python3 python3Packages.pynvml --run "python3 /etc/nixos/scripts/nvidia-oc.py"
+          cd ${pkgs.coreutils}/bin
+          cp /sys/class/power_supply/BAT0/charge_control_end_threshold /tmp
+          echo 80 > /tmp/charge_control_end_threshold
+          cp /tmp/charge_control_end_threshold /sys/class/power_supply/BAT0/charge_control_end_threshold
+          rm /tmp/charge_control_end_threshold
         '';
         wantedBy = ["multi-user.target"];
       };
     };
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
