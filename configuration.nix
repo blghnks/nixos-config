@@ -176,7 +176,7 @@ in
       startup = {
         script = ''
           ${pkgs.ryzenadj}/bin/ryzenadj -a 20000 -b 24000 -c 18000
-          ${pkgs.nix}/bin/nix-shell -p python3 python3Packages.pynvml --run "python3 /etc/nixos/scripts/nvidia-oc.py"
+          ${pkgs.nix}/bin/nix-shell -I nixpkgs=${inputs.nixpkgs} -p python3 python3Packages.pynvml --run "python3 /etc/nixos/scripts/nvidia-oc.py"
           cd ${pkgs.coreutils}/bin
           cp /sys/class/power_supply/BAT0/charge_control_end_threshold /tmp
           echo 80 > /tmp/charge_control_end_threshold
