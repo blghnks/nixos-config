@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 let
   common-pkgs = import ./common-packages.nix { inherit pkgs inputs; };
@@ -31,6 +31,7 @@ in
   };
 
   hardware = {
+    cpu.amd.ryzen-smu.enable = true;
     bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -44,10 +45,10 @@ in
       modesetting.enable = true;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
-      dynamicBoost.enable = true;
+      dynamicBoost.enable = false;
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       prime = {
         offload = {
           enable = true;
@@ -83,6 +84,7 @@ in
   };
 
   services = {
+    cloudflare-warp.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     xserver = {
@@ -110,6 +112,10 @@ in
         enable = true;
         wayland.enable = true;
       };
+    };
+    system76-scheduler = {
+      enable = true;
+      useStockConfig =true;
     };
     desktopManager = {
       plasma6.enable = true;
@@ -172,11 +178,18 @@ in
   };
 
   systemd = {
+    user = {
+      services = {
+        warp-taskbar = {
+          wantedBy = lib.mkForce [];
+        };
+      };
+    };
     services = {
       startup = {
         script = ''
-          ${pkgs.ryzenadj}/bin/ryzenadj -a 20000 -b 24000 -c 18000
-          ${pkgs.nix}/bin/nix-shell -I nixpkgs=${inputs.nixpkgs} -p python3 python3Packages.pynvml --run "python3 /etc/nixos/scripts/nvidia-oc.py"
+          ${pkgs.nix}/bin/nix-shell -I nixpkgs=${inputs.nixpkgs} /etc/nixos/scripts/nvidia.nix
+          ${pkgs.ryzenadj}/bin/ryzenadj --set-coall=0xFFFE2
           cd ${pkgs.coreutils}/bin
           cp /sys/class/power_supply/BAT0/charge_control_end_threshold /tmp
           echo 80 > /tmp/charge_control_end_threshold
@@ -184,8 +197,16 @@ in
           rm /tmp/charge_control_end_threshold
         '';
         wantedBy = ["multi-user.target"];
+        serviceConfig = {
+          Type = "oneshot";
+        };
       };
     };
+  };
+
+  powerManagement = {
+    cpufreq.max = 3600000;
+    cpuFreqGovernor = "ondemand";
   };
 
   system.stateVersion = "24.11";
