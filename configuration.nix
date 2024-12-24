@@ -94,7 +94,13 @@ in
       extraConfig.pipewire = {
         "10-clock-rate" = {
           "context.properties" = {
-            "default.clock.min-quantum" = 512;
+            "default.clock.rate" = 48000;
+            "default.clock.allowed-rates" = [48000 96000];
+            "default.clock.min-quantum" = 128;
+            "default.clock.max-quantum" = 8192;
+            "default.clock.quantum" = 1024;
+            "default.clock.quantum-limit" = 8192;
+            "default.clock.quantum-floor" = 128;
           };
         };
       };
@@ -205,7 +211,7 @@ in
   };
 
   powerManagement = {
-    cpufreq.max = 3600000;
+    cpufreq.max = 3800000;
     cpuFreqGovernor = "ondemand";
   };
 
