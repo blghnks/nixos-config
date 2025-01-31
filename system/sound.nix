@@ -1,7 +1,7 @@
 {lib, inputs, ...}:
 
 {
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -13,12 +13,12 @@
       "10-clock-rate" = {
         "context.properties" = {
           "default.clock.rate" = 44100;
-          "default.clock.allowed-rates" = [44100 48000 96000];
-          "default.clock.min-quantum" = 128;
+          "default.clock.allowed-rates" = [44100 48000 88200 96000];
+          "default.clock.min-quantum" = 256;
           "default.clock.max-quantum" = 8192;
           "default.clock.quantum" = 1024;
           "default.clock.quantum-limit" = 8192;
-          "default.clock.quantum-floor" = 128;
+          "default.clock.quantum-floor" = 256;
         };
       };
     };

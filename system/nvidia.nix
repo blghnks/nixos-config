@@ -7,8 +7,8 @@
     };
     nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = true;
-      powerManagement.finegrained = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
       dynamicBoost.enable = false;
       open = true;
       nvidiaSettings = true;

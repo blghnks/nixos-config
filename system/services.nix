@@ -22,11 +22,7 @@
       startup = {
         script = ''
           ${pkgs.ryzenadj}/bin/ryzenadj --set-coall=0xFFFE2
-          cd ${pkgs.coreutils}/bin
-          cp /sys/class/power_supply/BAT0/charge_control_end_threshold /tmp
-          echo 80 > /tmp/charge_control_end_threshold
-          cp /tmp/charge_control_end_threshold /sys/class/power_supply/BAT0/charge_control_end_threshold
-          rm /tmp/charge_control_end_threshold
+          ${pkgs.coreutils}/bin/echo 80 | ${pkgs.coreutils}/bin/tee /sys/class/power_supply/BAT0/charge_control_end_threshold
         '';
         wantedBy = ["multi-user.target"];
         serviceConfig = {

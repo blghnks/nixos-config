@@ -10,7 +10,12 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelParams = ["amdgpu.abmlevel=0" "amd_prefcore=disable" "amdgpu.dcdebugmask=0x10"];
+    kernelParams = [
+      "amdgpu.abmlevel=0"
+      "amdgpu.dcdebugmask=0x10"
+      "amdgpu.ppfeaturemask=0xffffffff"
+      "rcutree.enable_rcu_lazy=1"
+    ];
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [
       (btusb-mt7922-fix.overrideAttrs (_: {

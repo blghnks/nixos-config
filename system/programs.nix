@@ -10,12 +10,14 @@
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };
+    zsh.enable = true;
   };
 
   environment = {
     systemPackages = with pkgs; [
       ardour
       audacity
+      beets
       bottles
       brave
       carla
@@ -26,7 +28,6 @@
       krita
       librewolf
       lshw
-      neovim
       nvtopPackages.full
       obs-studio
       okteta
@@ -36,8 +37,10 @@
       protonvpn-cli_2
       protonvpn-gui
       qbittorrent
+      reaper
       rnote
       ryzenadj
+      supergee
       tauon
       thunderbird
       vesktop
@@ -45,6 +48,8 @@
       vscodium-fhs
       vulkan-tools
       wget
+      yabridge
+      yabridgectl
     ];
   };
 }

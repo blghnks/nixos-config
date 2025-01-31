@@ -12,6 +12,7 @@
     };
   };
   environment = {
+    pathsToLink = [ "/share/zsh" ];
     plasma6.excludePackages = with
       pkgs.kdePackages; [
         khelpcenter
