@@ -1,14 +1,14 @@
-{lib, inputs, ...}:
+{ lib, pkgs, inputs, ... }:
 
 {
   services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+
     extraConfig.pipewire = {
       "10-clock-rate" = {
         "context.properties" = {
@@ -21,6 +21,14 @@
           "default.clock.quantum-floor" = 256;
         };
       };
+    };
+
+    wireplumber = {
+      enable = true;
+      extraLv2Packages = with pkgs; [
+        bankstown-lv2
+        lsp-plugins
+      ];
     };
   };
 }

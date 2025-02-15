@@ -1,8 +1,11 @@
-{lib, inputs, ...}:
+{ lib, inputs, ... }:
+
 {
   networking = {
     hostName = "nixos";
+
     networkmanager.enable = true;
+
     firewall = {
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
@@ -10,7 +13,11 @@
   };
 
   services = {
-    cloudflare-warp.enable = true;
+    cloudflare-warp = {
+      enable = true;
+      openFirewall = true;
+    };
+
     tailscale.enable = true;
   };
 

@@ -1,4 +1,5 @@
-{lib, inputs, ...}:
+{ lib, inputs, ... }:
+
 {
   time.timeZone = "Europe/Istanbul";
 
@@ -17,12 +18,11 @@
     };
   };
 
+  console.keyMap = "trq";
   services.xserver = {
     xkb = {
       layout = "tr";
       variant = "";
     };
   };
-
-  console.keyMap = "trq";
 }

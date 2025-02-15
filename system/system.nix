@@ -1,4 +1,5 @@
-{lib, pkgs, inputs, ...}:
+{ lib, pkgs, inputs, ... }:
+
 {
   users.users.tux = {
     shell = pkgs.zsh;

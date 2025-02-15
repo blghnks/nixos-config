@@ -1,4 +1,5 @@
-{lib, config, pkgs, inputs, ...}:
+{ config, lib, pkgs, inputs, ... }:
+
 {
   hardware = {
     graphics = {
@@ -7,19 +8,19 @@
     };
     nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      dynamicBoost.enable = false;
+      powerManagement.enable = true;
+      powerManagement.finegrained = true;
+      dynamicBoost.enable = true;
       open = true;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
       prime = {
+        amdgpuBusId = "PCI:105:0:0";
+        nvidiaBusId = "PCI:1:0:0";
         offload = {
           enable = true;
           enableOffloadCmd = true;
         };
-        amdgpuBusId = "PCI:105:0:0";
-        nvidiaBusId = "PCI:1:0:0";
       };
     };
   };
