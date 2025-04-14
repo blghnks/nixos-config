@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 let
   btusb-mt7922-fix = pkgs.callPackage ../patches/btusb-mt7922-fix.nix {
@@ -14,8 +14,8 @@ in {
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "amdgpu.abmlevel=0"
-      "amdgpu.dcdebugmask=0x10"
-      "rcutree.enable_rcu_lazy=1"
+      # "amdgpu.dcdebugmask=0x10"
+      # "rcutree.enable_rcu_lazy=1"
     ];
     extraModulePackages = [
       (btusb-mt7922-fix.overrideAttrs (_: {

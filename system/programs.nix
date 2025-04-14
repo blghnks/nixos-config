@@ -28,22 +28,25 @@ in {
 
   environment = {
     systemPackages = with pkgs; [
+      kdePackages.krdp
       ardour
       audacity
-      beets
       bottles
       brave
       carla
       git
       glxinfo
-      jamesdsp
+      pkgs-stable.jamesdsp
       jdk17
       jdk8
       kdePackages.kdenlive
+      kdePackages.plasma-thunderbolt
       krita
       librewolf
       lshw
+      nil
       nvtopPackages.full
+      neovim
       obs-studio
       okteta
       onlyoffice-desktopeditors
@@ -63,11 +66,10 @@ in {
       unrar
       pkgs-stable.vesktop
       vlc
-      vscodium-fhs
       vulkan-tools
       wget
-      yabridge
-      yabridgectl
+      zapzap
+      vscodium-fhs
     ];
   };
 }

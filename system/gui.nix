@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   services = {
@@ -15,7 +15,7 @@
 
   environment = {
     pathsToLink = [ "/share/zsh" ];
-    sessionVariables = rec {
+    sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
 

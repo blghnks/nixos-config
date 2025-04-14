@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   users.users.tux = {
@@ -6,7 +6,7 @@
     isNormalUser = true;
     description = "tux";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
+    packages = [];
   };
 
   system.stateVersion = "24.11";

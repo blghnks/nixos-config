@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   hardware = {
@@ -13,9 +13,9 @@
       dynamicBoost.enable = true;
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
       prime = {
-        amdgpuBusId = "PCI:105:0:0";
+        amdgpuBusId = "PCI:69:0:0";
         nvidiaBusId = "PCI:1:0:0";
         offload = {
           enable = true;

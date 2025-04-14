@@ -1,5 +1,3 @@
-{ lib, inputs, ... }:
-
 {
   time.timeZone = "Europe/Istanbul";
 

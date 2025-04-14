@@ -6,7 +6,7 @@
     ];
     username = "tux";
     homeDirectory = "/home/tux";
-    stateVersion = "25.05";
+    stateVersion = "24.11";
   };
   programs = {
     home-manager.enable = true;

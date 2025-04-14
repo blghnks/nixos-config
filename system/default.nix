@@ -1,5 +1,3 @@
-{ config, lib, pkgs, inputs, ... }:
-
 {
   imports = [
     ./boot.nix
@@ -10,7 +8,6 @@
     ./nix.nix
     ./nvidia.nix
     ./programs.nix
-    ./security.nix
     ./services.nix
     ./sound.nix
     ./system.nix
