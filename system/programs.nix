@@ -13,10 +13,10 @@ in {
 
     corectrl = {
       enable = true;
-      gpuOverclock = {
-        enable = true;
-        ppfeaturemask = "0xffffffff";
-      };
+      # gpuOverclock = {
+      #   enable = true;
+      #   ppfeaturemask = "0xffffffff";
+      # };
     };
 
     steam = {
@@ -64,7 +64,7 @@ in {
       tauon
       thunderbird
       unrar
-      pkgs-stable.vesktop
+      vesktop
       vlc
       vulkan-tools
       wget

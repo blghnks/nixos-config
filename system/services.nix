@@ -5,7 +5,6 @@
     fstrim.enable = true;
     fwupd.enable = true;
     printing.enable = true;
-    system76-scheduler.enable = true;
 
     xserver = {
       enable = true;
