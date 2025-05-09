@@ -1,1 +1,1 @@
-NixOS config for my laptop Flow X13.
+NixOS config for someone elses laptop Flow X13.
