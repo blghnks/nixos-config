@@ -1,10 +1,11 @@
-{pkgs, ...}:
+{ pkgs, ... }:
+
 let
   myAliases = {
-    java8 = "${pkgs.jdk8}/lib/openjdk/bin/java";
-    java17 = "${pkgs.jdk17}/lib/openjdk/bin/java";
+    vesktop = "systemctl restart byedpi.service && ${pkgs.vesktop}/bin/vesktop --proxy-server=socks5://127.0.0.1:1080";
   };
-in {
+in
+{
   programs = {
     zsh = {
       enable = true;

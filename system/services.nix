@@ -2,13 +2,10 @@
 
 {
   services = {
+    supergfxd.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     printing.enable = true;
-
-    xserver = {
-      enable = true;
-    };
   };
 
   zramSwap = {
@@ -19,13 +16,17 @@
     services = {
       startup = {
         script = ''
-          ${pkgs.ryzenadj}/bin/ryzenadj --set-coall=0xFFFF0
-          ${pkgs.coreutils}/bin/echo 84 | ${pkgs.coreutils}/bin/tee /sys/class/power_supply/BAT0/charge_control_end_threshold
-          '';
+          ${pkgs.coreutils}/bin/echo "84" > /sys/class/power_supply/BAT0/charge_control_end_threshold
+        '';
         wantedBy = ["multi-user.target"];
         serviceConfig = {
           Type = "oneshot";
         };
+      };
+      byedpi = {
+        script = ''
+          ${pkgs.byedpi}/bin/ciadpi -r 1+s
+        '';
       };
     };
   };

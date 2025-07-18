@@ -2,66 +2,55 @@
 
 let
   pkgs-stable = inputs.nixpkgs-stable.legacyPackages.x86_64-linux;
-in {
+in
+{
   programs = {
+    corectrl.enable = true;
     direnv.enable = true;
     gamemode.enable = true;
-    java.enable = true;
     kdeconnect.enable = true;
     partition-manager.enable = true;
     zsh.enable = true;
-
-    corectrl = {
-      enable = true;
-      # gpuOverclock = {
-      #   enable = true;
-      #   ppfeaturemask = "0xffffffff";
-      # };
-    };
-
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
   };
 
   environment = {
     systemPackages = with pkgs; [
-      kdePackages.krdp
+      amdgpu_top
       ardour
       audacity
       bottles
       brave
-      carla
+      byedpi
+      pkgs-stable.carla
       git
       glxinfo
-      pkgs-stable.jamesdsp
-      jdk17
-      jdk8
+      jamesdsp
       kdePackages.kdenlive
       kdePackages.plasma-thunderbolt
       krita
       librewolf
       lshw
-      nil
-      nvtopPackages.full
+      nixd
       neovim
       obs-studio
       okteta
       onlyoffice-desktopeditors
       pciutils
       picard
-      prismlauncher
-      protonup
-      protonup-qt
+      pkgs-stable.prismlauncher
       protonvpn-gui
       qbittorrent
       reaper
       rnote
       ryzenadj
       steamtinkerlaunch
-      tauon
+      pkgs-stable.tauon
       thunderbird
       unrar
       vesktop
@@ -70,6 +59,21 @@ in {
       wget
       zapzap
       vscodium-fhs
+      yabridge
+      yabridgectl
+      geonkick
+      lsp-plugins
+      nvtopPackages.amd
+      htop
+      zenith
+      mangohud
+      cmus
+      nicotine-plus
+      nero-umu
+      gamescope
+      bespokesynth
+      nixfmt-rfc-style
+      vscode
     ];
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   nix = {
@@ -6,7 +6,7 @@
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
     };
-
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}"];
     gc = {
       automatic = true;
       dates = "weekly";
@@ -17,7 +17,6 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      SDL2
     ];
   };
 
