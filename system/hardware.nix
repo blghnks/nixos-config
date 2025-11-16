@@ -1,10 +1,14 @@
+{ lib, ... }:
 {
   hardware = {
+    cpu = {
+      amd.ryzen-smu.enable = true;
+    };
     amdgpu = {
       overdrive = {
         enable = true;
-        ppfeaturemask = "0xfff7ffff";
       };
+      opencl.enable = true;
     };
     graphics = {
       enable = true;
@@ -16,10 +20,14 @@
     };
   };
 
-  powerManagement.cpufreq = {
-    min = 200000;
-#     max = 4000000;
+  powerManagement = {
+    cpufreq = {
+      min = 200000;
+      max = 4000000;
+    };
   };
 
-  services.hardware.bolt.enable = true;
+  services = {
+    hardware.bolt.enable = true;
+  };
 }

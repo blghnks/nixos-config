@@ -1,13 +1,13 @@
 { pkgs, ... }:
 
 {
-  users.users.tux = {
+  users.users.blghn = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    description = "tux";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "Bilgehan";
+    extraGroups = [ "networkmanager" "wheel" "corectrl" "adbusers"];
     packages = [];
   };
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

@@ -2,7 +2,18 @@
 
 {
   services = {
+    mysql = {
+      enable = true;
+      package = pkgs.mysql84;
+    };
+#     scx = {
+#       enable = true;
+#       scheduler = "scx_lavd";
+#     };
+    switcherooControl.enable =true;
+#     asusd.enable = true;
     supergfxd.enable = true;
+    system76-scheduler.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     printing.enable = true;

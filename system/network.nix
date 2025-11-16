@@ -2,7 +2,7 @@
 
 {
   networking = {
-    hostName = "nixos";
+    hostName = "nixos-zephyrus";
     networkmanager.enable = true;
     firewall = {
       enable = true;

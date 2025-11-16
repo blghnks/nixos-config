@@ -23,57 +23,54 @@ in
     systemPackages = with pkgs; [
       amdgpu_top
       ardour
-      audacity
-      bottles
+      pkgs-stable.audacity
+      beets
+      bespokesynth
       brave
       byedpi
       pkgs-stable.carla
+      cmus
+      gamescope
       git
-      glxinfo
       jamesdsp
       kdePackages.kdenlive
       kdePackages.plasma-thunderbolt
       krita
       librewolf
       lshw
-      nixd
+      mangohud
+      mysql-workbench
       neovim
+      nero-umu
+      nicotine-plus
+      nixd
+      nixfmt-rfc-style
       obs-studio
       okteta
       onlyoffice-desktopeditors
       pciutils
       picard
+      pkgs-stable.pcsx2
       pkgs-stable.prismlauncher
       protonvpn-gui
       qbittorrent
       reaper
-      rnote
-      ryzenadj
+      pkgs-stable.ryzenadj
       steamtinkerlaunch
-      pkgs-stable.tauon
-      thunderbird
+      tauon
       unrar
       vesktop
       vlc
+      vscode
+      vscodium-fhs
       vulkan-tools
       wget
-      zapzap
-      vscodium-fhs
+      wineWowPackages.yabridge
+      winetricks
       yabridge
       yabridgectl
-      geonkick
-      lsp-plugins
-      nvtopPackages.amd
-      htop
+      zapzap
       zenith
-      mangohud
-      cmus
-      nicotine-plus
-      nero-umu
-      gamescope
-      bespokesynth
-      nixfmt-rfc-style
-      vscode
     ];
   };
 }

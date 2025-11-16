@@ -13,10 +13,10 @@
           "default.clock.rate" = 44100;
           "default.clock.allowed-rates" = [44100 48000 96000];
           "default.clock.min-quantum" = 256;
-          "default.clock.max-quantum" = 8192;
-          "default.clock.quantum" = 1024;
-          "default.clock.quantum-limit" = 8192;
-          "default.clock.quantum-floor" = 256;
+          "default.clock.max-quantum" = 2048;
+          "default.clock.quantum" = 256;
+          "default.clock.quantum-limit" = 2048;
+          "default.clock.quantum-floor" = 128;
         };
       };
     };
