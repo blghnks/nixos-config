@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, musnix, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
   {
     homeConfigurations = {
       blghn = home-manager.lib.homeManagerConfiguration {
@@ -30,7 +30,6 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
 	    modules = [
-	    inputs.musnix.nixosModules.musnix
           ./configuration.nix
         ];
       };
