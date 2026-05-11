@@ -1,5 +1,4 @@
-{ lib, ... }:
-
+{ lib, pkgs-stable, ... }:
 {
   networking = {
     hostName = "nixos-zephyrus";
@@ -13,12 +12,14 @@
   services = {
     cloudflare-warp = {
       enable = true;
-      udpPort = 3131;
     };
     tailscale.enable = true;
   };
 
   systemd = {
+    services = {
+      cloudflare-warp.serviceConfig.LogLevelMax = "notice";
+    };
     user = {
       services = {
         warp-taskbar = {

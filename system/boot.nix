@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
-  acpi-override = ../patches/s3-sleep-acpi-override-beta;
+  acpi-override = ../patches/s3-sleep-acpi-override;
 in
 {
   boot = {
@@ -13,7 +13,6 @@ in
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "mem_sleep_default=deep"
-      "rcutree.enable_rcu_lazy=1"
     ];
   };
 }

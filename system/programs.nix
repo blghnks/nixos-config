@@ -1,12 +1,18 @@
-{ pkgs, inputs, ... }:
-
-let
-  pkgs-stable = inputs.nixpkgs-stable.legacyPackages.x86_64-linux;
-in
+{ pkgs, pkgs-stable, inputs, ... }:
 {
   programs = {
     corectrl.enable = true;
-    direnv.enable = true;
+    direnv = {
+      enable = true;
+      package = pkgs.direnv;
+      silent = true;
+      loadInNixShell = true;
+      direnvrcExtra = "";
+      nix-direnv = {
+        enable = true;
+        package = pkgs.nix-direnv;
+      };
+    };
     gamemode.enable = true;
     kdeconnect.enable = true;
     partition-manager.enable = true;
@@ -21,38 +27,41 @@ in
 
   environment = {
     systemPackages = with pkgs; [
+      helix
+      mangohud
+      xdg-desktop-portal-gnome
+      xwayland-satellite
+      alacritty
+      wl-clipboard-rs
+      brightnessctl
       amdgpu_top
       ardour
-      pkgs-stable.audacity
+      audacity
       beets
       bespokesynth
       brave
       byedpi
-      pkgs-stable.carla
+      carla
       cmus
+      firefox
       gamescope
       git
       jamesdsp
-      kdePackages.kdenlive
-      kdePackages.plasma-thunderbolt
       krita
-      librewolf
       lshw
-      mangohud
-      mysql-workbench
       neovim
       nero-umu
-      nicotine-plus
+      nil
       nixd
-      nixfmt-rfc-style
+      nixfmt
       obs-studio
       okteta
       onlyoffice-desktopeditors
       pciutils
       picard
-      pkgs-stable.pcsx2
+      pcsx2
       pkgs-stable.prismlauncher
-      protonvpn-gui
+      proton-vpn
       qbittorrent
       reaper
       pkgs-stable.ryzenadj
@@ -65,12 +74,12 @@ in
       vscodium-fhs
       vulkan-tools
       wget
-      wineWowPackages.yabridge
       winetricks
-      yabridge
-      yabridgectl
-      zapzap
       zenith
+      (callPackage ../custom-pkgs/cosmic-ext-alt {})
+      (callPackage ../custom-pkgs/visual-paradigm-ce {})
     ];
   };
+
+  virtualisation.podman.enable = true;
 }

@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 
 let
   myAliases = {
-    vesktop = "systemctl restart byedpi.service && DRI_PRIME=1002:1681! vesktop --proxy-server=socks5://127.0.0.1:1080";
+    vesktop = "ciadpi -r 1+s & DRI_PRIME=1002:1681! vesktop --proxy-server=socks5://127.0.0.1:1080";
     steam = "DRI_PRIME=1002:1681! steam";
   };
 in

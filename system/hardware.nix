@@ -5,9 +5,7 @@
       amd.ryzen-smu.enable = true;
     };
     amdgpu = {
-      overdrive = {
-        enable = true;
-      };
+      overdrive.enable = true;
       opencl.enable = true;
     };
     graphics = {
@@ -18,16 +16,15 @@
       enable = true;
       powerOnBoot = true;
     };
-  };
-
-  powerManagement = {
-    cpufreq = {
-      min = 200000;
-      max = 4000000;
+    openrazer = {
+      enable = true;
+      users = [  "blghn" ];
+      batteryNotifier.enable = false;
     };
   };
-
-  services = {
-    hardware.bolt.enable = true;
-  };
+#   services = {
+#     hardware = {
+#       bolt.enable = true;
+#     };
+#   };
 }

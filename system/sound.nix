@@ -10,13 +10,13 @@
     extraConfig.pipewire = {
       "10-clock-rate" = {
         "context.properties" = {
-          "default.clock.rate" = 44100;
-          "default.clock.allowed-rates" = [44100 48000 96000];
-          "default.clock.min-quantum" = 256;
-          "default.clock.max-quantum" = 2048;
-          "default.clock.quantum" = 256;
-          "default.clock.quantum-limit" = 2048;
-          "default.clock.quantum-floor" = 128;
+          "default.clock.rate" = 48000;
+          "default.clock.allowed-rates" = [44100 48000 96000 192000];
+          "default.clock.min-quantum" = 1024;
+          "default.clock.max-quantum" = 4096;
+          "default.clock.quantum" = 1536;
+          "default.clock.quantum-limit" = 8192;
+          "default.clock.quantum-floor" = 1024;
         };
       };
     };
